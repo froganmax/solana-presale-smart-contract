@@ -55,7 +55,7 @@ pub struct UserClaimed {
 }
 
 #[event]
-pub struct Refund {
+pub struct RefundToken {
     pub user: Pubkey,
     pub amount: u64,
     pub time_stamp: u32

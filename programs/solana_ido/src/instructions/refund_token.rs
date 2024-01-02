@@ -1,6 +1,6 @@
 use {anchor_lang::prelude::*, crate::errors::ErrorCode, crate::state::*};
 #[derive(Accounts)]
-pub struct Refund<'info> {
+pub struct RefundToken<'info> {
     /// CHECK: This is vault account.
     #[account(
         mut,
@@ -23,7 +23,7 @@ pub struct Refund<'info> {
 }
 
 #[access_control(is_cancelled(&ctx.accounts.presale_account))]
-pub fn handler(ctx: Context<Refund>) -> Result<()> {
+pub fn handler(ctx: Context<RefundToken>) -> Result<()> {
     let vault_amount = **ctx.accounts.escrow_account.lamports.borrow();
     let amount = ctx.accounts.user_account.user_buy_amount;
 

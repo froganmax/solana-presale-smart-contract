@@ -8,6 +8,7 @@ pub struct BuyToken<'info> {
         seeds = [ SOL_VAULT_SEED.as_bytes() ],
         bump,
     )]
+    /// CHECK: This is not dangerous because we don't read or write from this account
     pub escrow_account: UncheckedAccount<'info>,
 
     #[account(

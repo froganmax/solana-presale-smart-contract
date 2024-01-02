@@ -2,23 +2,13 @@ import BN from "bn.js";
 import assert from "assert";
 import * as web3 from "@solana/web3.js";
 import * as anchor from "@coral-xyz/anchor";
-import * as anchor from "@coral-xyz/anchor";
-import BN from "bn.js";
-import assert from "assert";
-import * as web3 from "@solana/web3.js";
-import type { Errors } from "../target/types/errors";
-import type { Errors } from "../target/types/errors";
+import type { TokenPresale } from "../target/types/token_presale";
 
 describe("Test", () => {
   // Configure the client to use the local cluster
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.Errors as anchor.Program<Errors>;
-  
-  // Configure the client to use the local cluster
-  anchor.setProvider(anchor.AnchorProvider.env());
-
-  const program = anchor.workspace.Errors as anchor.Program<Errors>;
+  const program = anchor.workspace.Errors as anchor.Program<TokenPresale>;
   
   it("initialize", async () => {
     // Generate keypair for the new account

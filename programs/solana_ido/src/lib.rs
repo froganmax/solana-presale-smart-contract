@@ -1,3 +1,5 @@
+// #![feature(build_hasher_simple_hash_one)]
+
 pub mod errors;
 pub mod instructions;
 pub mod state;
@@ -6,7 +8,7 @@ use {anchor_lang::prelude::*, instructions::*};
 
 // This is your program's public key and it will update
 // automatically when you build the project.
-declare_id!("C9FnHPykP7m89VirYWgTfV3YDPFULtDeFgwPBAJZABrR");
+declare_id!("9ufYFGHnqCUyzd7RVorEnHKThz9S5ihSMdpRDAShkeaR");
 
 #[program]
 mod token_presale {
@@ -19,13 +21,13 @@ mod token_presale {
         buy_token:: handler(ctx, amount)
     }
 
-    pub fn refund(ctx: Context<Refund>) -> Result<()> {
-        refund:: handler(ctx)
+    pub fn refund_token(ctx: Context<RefundToken>) -> Result<()> {
+        refund_token:: handler(ctx)
     }
 
-    pub fn claim_token(ctx: Context<ClaimToken>, nonce_vault:u8) -> Result<()> {
-        claim_token:: handler(ctx, nonce_vault)
-    }
+    // pub fn claim_token(ctx: Context<ClaimToken>, nonce_vault:u8) -> Result<()> {
+    //     claim_token:: handler(ctx, nonce_vault)
+    // }
 
     pub fn cancel_presale(ctx: Context<CancelPresale>) -> Result<()> {
         cancel_presale:: handler(ctx)
