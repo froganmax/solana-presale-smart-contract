@@ -1,7 +1,26 @@
 # README
 
 This Solana program is designed to handle Token Presale. It provides functionalities such as initializing the IDO, buying tokens, refunding tokens, updating the presale period, and more.
-Instructions
+
+## GOALS
+
+### (STEP 1)
+
+- Presale via Whitelist
+- Admin Parameter, can set
+  - With specific SPL token
+  - Specific UNIX timestamps
+  - Max/wallet
+  - Set Max raised cap (Hard cap)
+  - Set SPL token address to be different from the contract owner
+  - LP Ratio
+
+### (STEP 2)
+
+- After presale & Public sale, function (it’s via smart contract or frontend) to
+  - Create LP with SPL token & SOL
+  - Burn LP token and lock liquidity permanently
+  - Transfer the remaining SOL to the predefined wallet address
 
 The program's instructions are defined in the instructions module. Here's a brief overview of each instruction:
 
