@@ -21,6 +21,7 @@ pub struct AdminAccount {
 #[account]
 pub struct UserAccount {
     pub user_buy_amount: u64,
+    pub user_sol_contributed: u64,
     pub is_claimed: u8
 }
 

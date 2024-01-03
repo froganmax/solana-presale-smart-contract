@@ -25,6 +25,7 @@ pub struct BuyToken<'info> {
     pub system_program: Program<'info, System>,
 }
 
+//amount in SOL
 #[access_control(is_presale_live(&ctx.accounts.presale_account))]
 pub fn handler(ctx: Context<BuyToken>, amount: u64) -> Result<()> {
     if ctx.accounts.presale_account.has_whitelist > 0 {
@@ -63,10 +64,22 @@ pub fn handler(ctx: Context<BuyToken>, amount: u64) -> Result<()> {
         ctx.accounts.presale_account.total_participants += 1;
     }
 
-    ctx.accounts.presale_account.presale_rate = ctx.accounts.presale_account.total_token_amount
-        / (ctx.accounts.presale_account.total_sol_amount + amount);
+    let fixed_presale_rate: u64 = 100;  // 100 tokens in their smallest unit
+
+    // Update total SOL amount received in the presale account.
     ctx.accounts.presale_account.total_sol_amount += amount;
-    ctx.accounts.user_account.user_buy_amount += amount;
+
+    // Calculate the number of tokens to allocate to the user.
+    // Both 'fixed_presale_rate' and 'amount' are now integers, so this operation is straightforward.
+    let tokens_to_allocate: u64 = fixed_presale_rate * amount;
+
+    // Update the user account with the amount of SOL they contributed.
+    ctx.accounts.user_account.user_sol_contributed += amount;
+
+    // Update the user account with the number of tokens they will receive.
+    ctx.accounts.user_account.user_buy_amount += tokens_to_allocate;
+
+
 
     emit!(UserBought {
         user: *ctx.accounts.authority.key,
