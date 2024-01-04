@@ -17,20 +17,24 @@ async function main() {
     const program = new anchor.Program(idl, programId);
     console.log("program " + program);
     //await program.rpc.initialize();
+
+    await program.rpc.create({
+        accounts: {
+            baseAccount: wallet.publicKey,
+            user: provider.wallet.publicKey,
+            systemProgram: programId,
+        },
+        signers: [wallet],
+    });
+
+    /* Fetch the account and check the value of count */
+    const account = await program.account.baseAccount.fetch(wallet.publicKey);
+    console.log('Count 0: ', account.count.toString())
+    // assert.ok(account.count.toString() == 0);
+    // _baseAccount = baseAccount;
+
+
 }
 
 main().then(() => console.log('Success')).catch(err => console.error(err));
 
-// import * as web3 from "@solana/web3.js";
-// import * as anchor from "@coral-xyz/anchor";
-// import type { TokenPresale } from "../target/types/token_presale";
-
-// // Configure the client to use the local cluster
-// anchor.setProvider(anchor.AnchorProvider.env());
-
-// const program = anchor.workspace.TokenPresale as anchor.Program<TokenPresale>;
-
-// // Client
-//console.log("My address:", program.provider.publicKey.toString());
-//const balance = await program.provider.connection.getBalance(program.provider.publicKey);
-// console.log(`My balance: ${balance / web3.LAMPORTS_PER_SOL} SOL`);
