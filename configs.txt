@@ -1,0 +1,9 @@
+run testnet with solana-test-validator
+
+Localtest 
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
+
+Devnet
+cluster = "https://api.devnet.solana.com"
+wallet = "~/.config/solana/id.json"

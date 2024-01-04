@@ -3,17 +3,21 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-solana_ido = "9ufYFGHnqCUyzd7RVorEnHKThz9S5ihSMdpRDAShkeaR"
+solana_ido = "4XszoJS6Sb4FyRhqqaspyWhk5zzLNZo7ix4ADJCJVdKW"
+test_program = "73FRpgaZw6KbXvtS7qaDpXDvfY6S9S32ybqqSEHwgZ4W"
+
 
 [programs.devnet]
 solana_ido = "9ufYFGHnqCUyzd7RVorEnHKThz9S5ihSMdpRDAShkeaR"
+test_program = "73FRpgaZw6KbXvtS7qaDpXDvfY6S9S32ybqqSEHwgZ4W"
+
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "http://api.devnet.solana.com"
-wallet = "/Users/gic_owner/.config/solana/id.json"
+cluster = "Localnet"
+wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

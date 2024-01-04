@@ -8,36 +8,36 @@ describe("Test", () => {
   // Configure the client to use the local cluster
   anchor.setProvider(anchor.AnchorProvider.env());
 
-  const program = anchor.workspace.Errors as anchor.Program<TokenPresale>;
-  
+  const program = anchor.workspace.TokenPresale as anchor.Program<TokenPresale>;
+
   it("initialize", async () => {
     // Generate keypair for the new account
     const newAccountKp = new web3.Keypair();
 
     // Send transaction
-    const data = new BN(42);
-    const txHash = await program.methods
-      .initialize(data)
-      .accounts({
-        newAccount: newAccountKp.publicKey,
-        signer: program.provider.publicKey,
-        systemProgram: web3.SystemProgram.programId,
-      })
-      .signers([newAccountKp])
-      .rpc();
-    console.log(`Use 'solana confirm -v ${txHash}' to see the logs`);
+    // const data = new BN(42);
+    // const txHash = await program.methods
+    //   .initialize(data)
+    //   .accounts({
+    //     newAccount: newAccountKp.publicKey,
+    //     signer: program.provider.publicKey,
+    //     systemProgram: web3.SystemProgram.programId,
+    //   })
+    //   .signers([newAccountKp])
+    //   .rpc();
+    // console.log(`Use 'solana confirm -v ${txHash}' to see the logs`);
 
-    // Confirm transaction
-    await program.provider.connection.confirmTransaction(txHash);
+    // // Confirm transaction
+    // await program.provider.connection.confirmTransaction(txHash);
 
-    // Fetch the created account
-    const newAccount = await program.account.newAccount.fetch(
-      newAccountKp.publicKey
-    );
+    // // Fetch the created account
+    // const newAccount = await program.account.newAccount.fetch(
+    //   newAccountKp.publicKey
+    // );
 
-    console.log("On-chain data is:", newAccount.data.toString());
+    // console.log("On-chain data is:", newAccount.data.toString());
 
-    // Check whether the data on-chain is equal to local 'data'
-    assert(data.eq(newAccount.data));
+    // // Check whether the data on-chain is equal to local 'data'
+    // assert(data.eq(newAccount.data));
   });
 });

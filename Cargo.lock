@@ -2305,6 +2305,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "test_program"
+version = "0.1.0"
+dependencies = [
+ "anchor-lang",
+ "anchor-spl",
+ "solana-program",
+]
+
+[[package]]
 name = "thiserror"
 version = "1.0.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"

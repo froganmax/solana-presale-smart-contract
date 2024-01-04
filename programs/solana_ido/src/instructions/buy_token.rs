@@ -64,7 +64,7 @@ pub fn handler(ctx: Context<BuyToken>, amount: u64) -> Result<()> {
         ctx.accounts.presale_account.total_participants += 1;
     }
 
-    let fixed_presale_rate: u64 = 100;  // 100 tokens in their smallest unit
+    let fixed_presale_rate: u64 = 100;
 
     // Update total SOL amount received in the presale account.
     ctx.accounts.presale_account.total_sol_amount += amount;
