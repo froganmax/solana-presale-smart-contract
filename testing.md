@@ -1,14 +1,11 @@
-start local test validator with  ```solana-test-validator```
+start local test validator with `solana-test-validator`
 
-run ```anchor build```
-run ```anchor deploy```
+run `anchor build`
+run `anchor deploy`
 
-get the program ID eg ```4XszoJS6Sb4FyRhqqaspyWhk5zzLNZo7ix4ADJCJVdKW```
+get the program ID eg `CzvDqDn7oCVwh9fHYDRCVhXqFDtqDxbNfJrk3mYYKKHn`
 
-
-
-
-Localtest 
+Localtest
 cluster = "Localnet"
 wallet = "~/.config/solana/id.json"
 

@@ -3,13 +3,11 @@ seeds = false
 skip-lint = false
 
 [programs.localnet]
-solana_ido = "4XszoJS6Sb4FyRhqqaspyWhk5zzLNZo7ix4ADJCJVdKW"
-test_program = "73FRpgaZw6KbXvtS7qaDpXDvfY6S9S32ybqqSEHwgZ4W"
+token_presale = "CzvDqDn7oCVwh9fHYDRCVhXqFDtqDxbNfJrk3mYYKKHn"
 
 
 [programs.devnet]
-solana_ido = "9ufYFGHnqCUyzd7RVorEnHKThz9S5ihSMdpRDAShkeaR"
-test_program = "73FRpgaZw6KbXvtS7qaDpXDvfY6S9S32ybqqSEHwgZ4W"
+token_presale = "CzvDqDn7oCVwh9fHYDRCVhXqFDtqDxbNfJrk3mYYKKHn"
 
 
 [registry]

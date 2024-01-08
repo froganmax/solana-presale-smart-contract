@@ -3,9 +3,10 @@ use {anchor_lang::prelude::*, crate::state::*};
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(
-        address = PRESALE_TOKEN_MINT_PUBKEY.parse::<Pubkey>().unwrap(),
-    )]
+    // #[account(
+    //     address = PRESALE_TOKEN_MINT_PUBKEY.parse::<Pubkey>().unwrap(),
+    // )]
+    #[account(mut)]
     pub token_mint: Box<Account<'info, Mint>>,
 
     #[account(
@@ -13,7 +14,7 @@ pub struct Initialize<'info> {
         payer = admin,
         token::mint = token_mint,
         token::authority = token_vault, //the PDA address is both the vault account and the authority (and event the mint authority)
-        seeds = [ PRESALE_TOKEN_MINT_PUBKEY.parse::<Pubkey>().unwrap().as_ref() ],
+        seeds = [TOKEN_VAULT_SEED.as_bytes(), token_mint.key().as_ref() ],
         bump,
     )]
     ///the not-yet-created, derived token vault pubkey

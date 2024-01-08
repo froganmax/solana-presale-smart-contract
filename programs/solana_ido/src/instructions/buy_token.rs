@@ -1,5 +1,5 @@
 use anchor_lang::solana_program::{program::invoke, system_instruction};
-use {anchor_lang::prelude::*, crate::errors::ErrorCode, crate::state::*};
+use {crate::errors::ErrorCode, crate::state::*, anchor_lang::prelude::*};
 
 #[derive(Accounts)]
 pub struct BuyToken<'info> {
@@ -17,7 +17,9 @@ pub struct BuyToken<'info> {
         bump,
     )]
     pub presale_account: Box<Account<'info, PresaleAccount>>,
-    #[account(mut)]
+    #[account( mut,
+        seeds = [ USER_ACCOUNT_SEED.as_bytes(), authority.key().as_ref() ],
+        bump)]
     pub user_account: Box<Account<'info, UserAccount>>,
     //the authority allowed to transfer sol
     #[account(mut)]
@@ -28,19 +30,8 @@ pub struct BuyToken<'info> {
 //amount in SOL
 #[access_control(is_presale_live(&ctx.accounts.presale_account))]
 pub fn handler(ctx: Context<BuyToken>, amount: u64) -> Result<()> {
-    if ctx.accounts.presale_account.has_whitelist > 0 {
-        match ctx
-            .accounts
-            .presale_account
-            .white_list
-            .iter()
-            .position(|og| *og == ctx.accounts.authority.key.key().to_string())
-        {
-            Some(_index) => {}
-            None => {
-                return Err(error!(ErrorCode::NotInWhiteList));
-            }
-        }
+    if ctx.accounts.user_account.is_whitelisted == false {
+        return Err(error!(ErrorCode::NotInWhiteList));
     }
     if **ctx.accounts.authority.lamports.borrow() < amount {
         return Err(error!(ErrorCode::NoEnoughSol));
@@ -78,8 +69,6 @@ pub fn handler(ctx: Context<BuyToken>, amount: u64) -> Result<()> {
 
     // Update the user account with the number of tokens they will receive.
     ctx.accounts.user_account.user_buy_amount += tokens_to_allocate;
-
-
 
     emit!(UserBought {
         user: *ctx.accounts.authority.key,

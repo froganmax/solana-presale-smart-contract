@@ -26,31 +26,32 @@ pub struct ClaimToken<'info> {
     )]
     pub presale_account: Box<Account<'info, PresaleAccount>>,
     #[account(
-        init_if_needed,
-        payer = authority,
+        mut,
+        // init_if_needed,
+        // payer = authority,
         seeds = [ USER_ACCOUNT_SEED.as_bytes(), authority.key().as_ref() ],
-        bump,
-        space = USER_ACCOUNT_SIZE
+        bump
+        // space = USER_ACCOUNT_SIZE
     )]
     pub user_account: Box<Account<'info, UserAccount>>,
-    //the authority allowed to transfer token
+    // the authority allowed to transfer token
     #[account(mut)]
     pub authority: Signer<'info>,
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub rent: Sysvar<'info, Rent>,
-    pub token_vault_bump: u8,
-    pub presale_account_bump: u8,
+    // pub token_vault_bump: u8,
+    // pub presale_account_bump: u8,
 }
 
 #[access_control(is_finalized(&ctx.accounts.presale_account))]
-pub fn handler(ctx: Context<ClaimToken>, nonce_vault: u8) -> Result<()> {
+pub fn handler(ctx: Context<ClaimToken>, nonce_vault: u8, token_vault_bump: u8, presale_account_bump: u8) -> Result<()> {
     let token_mint_key = ctx.accounts.token_mint.key();
     let seeds = &[
         token_mint_key.as_ref(), 
         &[nonce_vault], 
-        &[ctx.accounts.token_vault_bump], 
-        &[ctx.accounts.presale_account_bump]
+        &[token_vault_bump], 
+        &[presale_account_bump]
     ];
     let signer = &[&seeds[..]];
     let amount =
