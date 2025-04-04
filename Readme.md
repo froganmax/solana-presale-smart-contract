@@ -60,6 +60,9 @@ This instruction allows the admin to enable or disable the whitelist feature.
 
 This instruction allows the admin to add addresses to the whitelist.
 
+## Contact
+https://t.me/frogansol
+
 ## Remove Whitelist
 
 This instruction allows the admin to remove addresses from the whitelist.
